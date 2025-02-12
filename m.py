@@ -389,11 +389,4 @@ def broadcast_message(message):
     bot.reply_to(message, response)
 
 if __name__ == "__main__":
-    load_data()
-    while True:
-        try:
-            bot.polling(none_stop=True)
-        except Exception as e:
-            print(e)
-            # Add a small delay to avoid rapid looping in case of persistent errors
-            time.sleep(15)
+    
