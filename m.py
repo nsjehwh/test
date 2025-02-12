@@ -11,7 +11,7 @@ import json
 # Insert your Telegram bot token here
 bot = telebot.TeleBot('8006244049:AAE8OjtzqxzQX_udGx6DEEZleESvyLMpHeU')
 # Admin user IDs
-admin_id = {"5676671574"}
+admin_id = {"5730843286"}
 
 # Files for data storage
 USER_FILE = "users.json"
@@ -389,4 +389,12 @@ def broadcast_message(message):
     bot.reply_to(message, response)
 
 if __name__ == "__main__":
+    load_data()
+    while True:
+        try:
+            bot.polling(none_stop=True)
+        except Exception as e:
+            print(e)
+            # Add a small delay to avoid rapid looping in case of persistent errors
+            time.sleep(15)
     
